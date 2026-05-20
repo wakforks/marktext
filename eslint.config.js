@@ -13,6 +13,7 @@ export default [
   {
     ignores: [
       'out/**',
+      'static/locales/*.min.json',
       'src/muya/lib/assets/libs/**',
       'src/muya/lib/parser/marked/urlify.js',
       'src/renderer/src/assets/symbolIcon/index.js',

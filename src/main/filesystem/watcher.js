@@ -30,6 +30,7 @@ const add = async(
   const stats = await fsPromises.stat(pathname)
   const birthTime = stats.birthtime
   const isMarkdown = hasMarkdownExtension(pathname)
+  const isHidden = path.basename(pathname).startsWith('.')
   const file = {
     pathname,
     name: path.basename(pathname),
@@ -60,6 +61,12 @@ const add = async(
         return
       }
     }
+    win.webContents.send(EVENT_NAME[type], {
+      type: 'add',
+      change: file
+    })
+  } else if (isHidden) {
+    // Send hidden non-markdown files to the tree (shown with reduced opacity, non-clickable).
     win.webContents.send(EVENT_NAME[type], {
       type: 'add',
       change: file
@@ -170,7 +177,16 @@ class Watcher {
       ignored: (pathname, fileInfo) => {
         // This function is called twice, once with a single argument (the path),
         // second time with two arguments (the path and the "fs.Stats" object of that path).
-        // Filter node_modules and .asar archives only, not hidden directories
+        //
+        // Explicitly allow hidden files and directories (names starting with a dot).
+        // chokidar v5 may apply a default dotfile filter even when a custom ignored
+        // function is provided; this early return prevents that.
+        const basename = path.basename(pathname)
+        if (basename.startsWith('.')) {
+          return false
+        }
+
+        // Filter node_modules and .asar archives
         if (!fileInfo) {
           return /(?:^|[/\\])(?:node_modules|(?:.+\.asar))/.test(pathname)
         }
