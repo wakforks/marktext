@@ -21,7 +21,8 @@ export const railscastsThemes = Object.freeze([
   'oxocarbon-dark',
   'kanagawa',
   'nightfox',
-  'cyberdream'
+  'cyberdream',
+  'wk-hiva'
 ])
 
 export const oneDarkThemes = Object.freeze(['one-dark'])

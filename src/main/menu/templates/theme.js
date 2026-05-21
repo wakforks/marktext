@@ -366,6 +366,16 @@ export default function(userPreference) {
       click(menuItem, browserWindow) {
         actions.selectTheme('tokyo-night-storm')
       }
+    },
+    {
+      label: t('menu.theme.wkHiva'),
+      type: 'radio',
+      id: 'wk-hiva',
+      enabled: isThemeSelectionEnabled,
+      checked: theme === 'wk-hiva',
+      click(menuItem, browserWindow) {
+        actions.selectTheme('wk-hiva')
+      }
     }
   )
   return {

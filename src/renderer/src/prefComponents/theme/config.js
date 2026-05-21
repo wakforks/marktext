@@ -33,7 +33,8 @@ export const themes = [
   { name: 'solarized-dark' },
   { name: 'synthwave-84' },
   { name: 'tokyo-night' },
-  { name: 'tokyo-night-storm' }
+  { name: 'tokyo-night-storm' },
+  { name: 'wk-hiva' }
 ]
 
 // getAutoSwitchThemeOptions removed - no longer needed

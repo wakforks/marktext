@@ -25,6 +25,7 @@ import oxocarbonDarkTheme from '../assets/themes/oxocarbon-dark.theme.css?inline
 import kanagawaTheme from '../assets/themes/kanagawa.theme.css?inline'
 import nightfoxTheme from '../assets/themes/nightfox.theme.css?inline'
 import cyberdreamTheme from '../assets/themes/cyberdream.theme.css?inline'
+import wkHivaTheme from '../assets/themes/wk-hiva.theme.css?inline'
 
 // New gogh themes - Light
 import catppuccinLatteTheme from '../assets/themes/catppuccin-latte.theme.css?inline'
@@ -65,6 +66,7 @@ import horizonDarkPrismTheme from '../assets/themes/prismjs/horizon-dark.theme.c
 import oxocarbonDarkPrismTheme from '../assets/themes/prismjs/oxocarbon-dark.theme.css?inline'
 import nightfoxPrismTheme from '../assets/themes/prismjs/nightfox.theme.css?inline'
 import cyberdreamPrismTheme from '../assets/themes/prismjs/cyberdream.theme.css?inline'
+import wkHivaPrismTheme from '../assets/themes/prismjs/wk-hiva.theme.css?inline'
 import graphitePrismTheme from '../assets/themes/prismjs/graphite.theme.css?inline'
 import ulyssesPrismTheme from '../assets/themes/prismjs/ulysses.theme.css?inline'
 
@@ -168,6 +170,10 @@ export const nightfox = () => {
 
 export const cyberdream = () => {
   return cyberdreamTheme + '\n' + cyberdreamPrismTheme
+}
+
+export const wkHiva = () => {
+  return wkHivaTheme + '\n' + wkHivaPrismTheme
 }
 
 // New gogh themes - Light (with matching Prism themes)

@@ -296,6 +296,11 @@ const onSelectChange = (type, value) => {
       background: #16181a;
       & a { color: #5ea1ff; }
     }
+    &.wk-hiva {
+      color: #ffffff;
+      background: #152638;
+      & a { color: #f0b752; }
+    }
 
     /* New gogh themes - Light */
     &.catppuccin-latte {

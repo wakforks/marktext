@@ -32,6 +32,7 @@ import {
   kanagawa,
   nightfox,
   cyberdream,
+  wkHiva,
   // New gogh themes - Light
   catppuccinLatte,
   gruvboxLight,
@@ -145,6 +146,9 @@ export const addThemeStyle = (theme) => {
       break
     case 'cyberdream':
       themeStyleEle.innerHTML = patchTheme(cyberdream())
+      break
+    case 'wk-hiva':
+      themeStyleEle.innerHTML = patchTheme(wkHiva())
       break
     // New gogh themes - Light
     case 'catppuccin-latte':
