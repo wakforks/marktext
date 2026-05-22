@@ -26,6 +26,11 @@ import './assets/styles/printService.css'
 window.marktext = {}
 bootstrapRenderer()
 
+// Warm the IPC channel — the first ipcRenderer.invoke() round-trip stalls
+// until the main process finishes its startup queue. A cheap fire-and-forget
+// call here pays that cost in the background before the user clicks anything.
+window.fileUtils?.pathExists('/').catch(() => {})
+
 // -----------------------------------------------
 // Be careful when changing code before this line!
 
