@@ -466,6 +466,12 @@ ipcMain.on('mt::ask-for-open-project-in-sidebar', async(e) => {
   }
 })
 
+ipcMain.on('mt::open-project-by-path', (e, pathname) => {
+  const win = BrowserWindow.fromWebContents(e.sender)
+  const resolvedPath = normalizeAndResolvePath(pathname)
+  ipcMain.emit('app-open-directory-by-id', win.id, resolvedPath, true)
+})
+
 ipcMain.on('mt::format-link-click', (e, { data, dirname }) => {
   if (!data || (!data.href && !data.text)) {
     return

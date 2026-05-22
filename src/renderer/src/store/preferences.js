@@ -17,6 +17,7 @@ export const usePreferencesStore = defineStore('preferences', {
     restoreLayoutState: true,
     defaultDirectoryToOpen: '',
     lastOpenedFolder: '',
+    recentlyOpenedFolders: [],
     treePathExcludePatterns: [],
     language: 'en',
 

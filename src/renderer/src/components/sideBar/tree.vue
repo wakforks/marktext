@@ -131,6 +131,34 @@
       v-else
       class="open-project"
     >
+      <div class="no-folder-message">
+        {{ t('sideBar.tree.noFolderOpened') }}
+      </div>
+      <div
+        v-if="recentFolders.length"
+        class="recent-locations"
+      >
+        <div class="recent-locations-header">
+          {{ t('sideBar.tree.recentLocations') }}
+        </div>
+        <div class="recent-locations-list">
+          <div
+            v-for="folder in recentFolders"
+            :key="folder.path"
+            class="recent-folder-item"
+            :title="folder.path"
+            @click="openRecentFolder(folder.path)"
+          >
+            <svg
+              class="icon"
+              aria-hidden="true"
+            >
+              <use xlink:href="#icon-folder" />
+            </svg>
+            <span class="text-overflow">{{ folder.name }}</span>
+          </div>
+        </div>
+      </div>
       <div class="centered-group">
         <button
           class="button-primary"
@@ -144,10 +172,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useProjectStore } from '@/store/project'
 import { useEditorStore } from '@/store/editor'
+import { usePreferencesStore } from '@/store/preferences'
 import Folder from './treeFolder.vue'
 import File from './treeFile.vue'
 import OpenedFile from './treeOpenedTab.vue'
@@ -175,13 +204,25 @@ const input = ref(null)
 
 const projectStore = useProjectStore()
 const editorStore = useEditorStore()
+const preferencesStore = usePreferencesStore()
 
 // Computed properties
 const { createCache } = storeToRefs(projectStore)
 
+const recentFolders = computed(() => {
+  return (preferencesStore.recentlyOpenedFolders || []).map((p) => ({
+    path: p,
+    name: window.path.basename(p) || p
+  }))
+})
+
 // Methods
 const openFolder = () => {
   projectStore.ASK_FOR_OPEN_PROJECT()
+}
+
+const openRecentFolder = (folderPath) => {
+  projectStore.OPEN_PROJECT_BY_PATH(folderPath)
 }
 
 const saveAll = (isClose) => {
@@ -385,20 +426,75 @@ onMounted(() => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  overflow: hidden;
+}
+
+.open-project .no-folder-message {
+  color: var(--sideBarTextColor);
+  text-align: center;
+  padding: 40px 15px 20px;
+  opacity: 0.7;
+}
+
+.open-project .recent-locations {
+  flex: 1;
+  overflow: auto;
+  padding: 0 10px;
+  min-height: 0;
+}
+
+.open-project .recent-locations-header {
+  color: var(--sideBarTextColor);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 5px 4px;
+  opacity: 0.6;
+}
+
+.open-project .recent-locations-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.open-project .recent-folder-item {
+  display: flex;
   align-items: center;
-  padding-bottom: 100px;
+  gap: 6px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--sideBarColor);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.open-project .recent-folder-item:hover {
+  background: var(--sideBarItemHoverBgColor);
+}
+
+.open-project .recent-folder-item .icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  fill: var(--sideBarIconColor);
+}
+
+.open-project .recent-folder-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .open-project .centered-group {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 15px 0;
+  flex-shrink: 0;
 }
 
 .open-project button.button-primary {
   display: block;
-  margin-top: 20px;
 }
 .new-input {
   outline: none;

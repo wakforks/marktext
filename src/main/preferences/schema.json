@@ -51,6 +51,12 @@
     "description": "General--The last folder that was opened in MarkText.--internal",
     "type": "string"
   },
+  "recentlyOpenedFolders": {
+    "description": "General--Recently opened folders for quick access in the sidebar.--internal",
+    "type": "array",
+    "items": { "type": "string" },
+    "default": []
+  },
   "startUpAction": {
     "description": "General--The action after MarkText startup, open the last opened folder, open the specified folder or blank page",
     "enum": ["folder", "openLastFolder", "blank", "restoreAll"],

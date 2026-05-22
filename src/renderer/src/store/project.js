@@ -159,6 +159,10 @@ export const useProjectStore = defineStore('project', {
       window.electron.ipcRenderer.send('mt::ask-for-open-project-in-sidebar')
     },
 
+    OPEN_PROJECT_BY_PATH(pathname) {
+      window.electron.ipcRenderer.send('mt::open-project-by-path', pathname)
+    },
+
     LISTEN_FOR_SIDEBAR_CONTEXT_MENU() {
       bus.on('SIDEBAR::show-in-folder', () => {
         const { pathname } = this.activeItem

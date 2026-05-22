@@ -358,6 +358,7 @@ class EditorWindow extends BaseWindow {
       }
 
       preferences.setItems({ lastOpenedFolder: pathname })
+      this._trackRecentFolder(preferences, pathname)
       appMenu.addRecentlyUsedDocument(pathname)
       this._openedRootDirectory = pathname
       ipcMain.emit('watcher-watch-directory', browserWindow, pathname)
@@ -490,6 +491,17 @@ class EditorWindow extends BaseWindow {
   }
 
   // --- private ---------------------------------
+
+  _trackRecentFolder(preferences, pathname) {
+    const MAX_RECENT_FOLDERS = 10
+    const recent = preferences.getItem('recentlyOpenedFolders') || []
+    const filtered = recent.filter((p) => p !== pathname)
+    filtered.unshift(pathname)
+    if (filtered.length > MAX_RECENT_FOLDERS) {
+      filtered.length = MAX_RECENT_FOLDERS
+    }
+    preferences.setItems({ recentlyOpenedFolders: filtered })
+  }
 
   /**
    * Open a new new tab from the markdown document.

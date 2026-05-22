@@ -277,7 +277,9 @@
       "closeAll": "Close All",
       "emptyProject": "Empty project",
       "createFile": "Create File",
-      "openFolder": "Open Folder"
+      "openFolder": "Open Folder",
+      "noFolderOpened": "No Folder is Opened.",
+      "recentLocations": "Recent Locations"
     },
     "toc": {
       "title": "Table Of Contents"
