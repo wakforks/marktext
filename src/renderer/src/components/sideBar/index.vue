@@ -230,7 +230,7 @@ const openFolder = () => {
 
 .sidebar-bottom-bar {
   flex-shrink: 0;
-  height: 36px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;

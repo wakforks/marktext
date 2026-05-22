@@ -462,7 +462,7 @@ ipcMain.on('mt::ask-for-open-project-in-sidebar', async(e) => {
 
   if (filePaths && filePaths[0]) {
     const resolvedPath = normalizeAndResolvePath(filePaths[0])
-    ipcMain.emit('app-open-directory-by-id', win.id, resolvedPath, true)
+    ipcMain.emit('app-open-directory-by-id', win.id, resolvedPath)
   }
 })
 
