@@ -30,14 +30,22 @@
       v-show="rightColumn"
       class="right-column"
     >
-      <tree
-        v-if="rightColumn === 'files'"
-        :project-tree="projectTree"
-        :opened-files="openedFiles"
-        :tabs="tabs"
-      />
-      <side-bar-search v-else-if="rightColumn === 'search'" />
-      <toc v-else-if="rightColumn === 'toc'" />
+      <div class="right-column-content">
+        <tree
+          v-if="rightColumn === 'files'"
+          :project-tree="projectTree"
+          :opened-files="openedFiles"
+          :tabs="tabs"
+        />
+        <side-bar-search v-else-if="rightColumn === 'search'" />
+        <toc v-else-if="rightColumn === 'toc'" />
+      </div>
+      <div
+        class="sidebar-bottom-bar"
+        @click="openFolder"
+      >
+        <span>Open Folder...</span>
+      </div>
     </div>
     <div
       v-show="rightColumn"
@@ -131,6 +139,10 @@ const handleLeftBottomClick = (name) => {
     projectStore.OPEN_SETTING_WINDOW()
   }
 }
+
+const openFolder = () => {
+  projectStore.ASK_FOR_OPEN_PROJECT()
+}
 </script>
 
 <style scoped>
@@ -205,6 +217,32 @@ const handleLeftBottomClick = (name) => {
   flex: 1;
   width: calc(100% - 50px);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-column-content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-bottom-bar {
+  flex-shrink: 0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--highlightThemeColor);
+  font-size: 13px;
+  background: var(--sideBarBgColor);
+  border-top: 1px solid var(--itemBgColor);
+}
+
+.sidebar-bottom-bar:hover {
+  background: var(--sideBarItemHoverBgColor);
 }
 
 .drag-bar {
