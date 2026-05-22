@@ -1523,8 +1523,7 @@ export const useEditorStore = defineStore('editor', {
 
       let content
       try {
-        const buffer = await window.fileUtils.readFile(pathname)
-        content = buffer.toString('utf8')
+        content = await window.fileUtils.readFile(pathname, 'utf8')
       } catch (err) {
         notice.notify({
           title: i18n.global.t('store.editor.errorLoadingTabTitle'),
