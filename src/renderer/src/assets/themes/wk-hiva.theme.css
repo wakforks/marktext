@@ -13,7 +13,7 @@
 
   --highlightColor: rgba(240, 183, 82, .6);
   --selectionColor: rgba(25, 33, 51, .8);
-  --editorColor: #ffffff;
+  --editorColor: #d4d4d4;
   --editorColor80: rgba(255, 255, 255, .8);
   --editorColor60: rgba(255, 255, 255, .6);
   --editorColor50: rgba(255, 255, 255, .5);
@@ -21,7 +21,7 @@
   --editorColor30: rgba(255, 255, 255, .3);
   --editorColor10: rgba(255, 255, 255, .1);
   --editorColor04: rgba(255, 255, 255, .04);
-  --editorBgColor: #152638;
+  --editorBgColor: #1c2733;
   --deleteColor: #FC4349;
   --iconColor: rgba(255, 255, 255, .56);
   --codeBgColor: #454759;
