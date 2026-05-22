@@ -65,8 +65,7 @@ const add = async(
       type: 'add',
       change: file
     })
-  } else if (isHidden) {
-    // Send hidden non-markdown files to the tree (shown with reduced opacity, non-clickable).
+  } else {
     win.webContents.send(EVENT_NAME[type], {
       type: 'add',
       change: file
@@ -203,7 +202,7 @@ class Watcher {
         if (fileInfo.isDirectory()) {
           return false
         }
-        return !hasMarkdownExtension(pathname)
+        return false
       },
       ignoreInitial: type === 'file',
       persistent: true,

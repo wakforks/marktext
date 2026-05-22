@@ -3,7 +3,7 @@
     ref="fileEl"
     :title="file.pathname"
     class="side-bar-file"
-    :style="{ 'padding-left': `${depth * 20 + 20}px`, opacity: file.isMarkdown ? 1 : 0.75 }"
+    :style="{ 'padding-left': `${depth * 20 + 20}px` }"
     :class="[
       { current: currentFile.pathname === file.pathname, active: file.id === activeItem.id }
     ]"
@@ -58,15 +58,16 @@ const { currentFile, tabs } = storeToRefs(editorStore)
 // from fileMixins
 const handleFileClick = () => {
   const { isMarkdown, pathname } = props.file
-  if (!isMarkdown) return
   const openedTab = tabs.value.find((f) => window.fileUtils.isSamePathSync(f.pathname, pathname))
   if (openedTab) {
     if (currentFile.value.pathname === openedTab.pathname) {
       return
     }
     editorStore.UPDATE_CURRENT_FILE(openedTab)
-  } else {
+  } else if (isMarkdown) {
     window.electron.ipcRenderer.send('mt::open-file', pathname, {})
+  } else {
+    editorStore.OPEN_READ_ONLY_FILE({ pathname })
   }
 }
 

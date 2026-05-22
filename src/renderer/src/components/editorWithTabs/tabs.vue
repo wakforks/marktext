@@ -12,7 +12,7 @@
           v-for="file of tabs"
           :key="file.id"
           :title="file.pathname"
-          :class="{ active: currentFile.id === file.id, unsaved: !file.isSaved }"
+          :class="{ active: currentFile.id === file.id, unsaved: !file.isSaved, 'read-only': file.isReadOnly }"
           :data-id="file.id"
           @click.stop="selectFile(file)"
           @click.middle="closeTab(file.id)"
@@ -318,6 +318,12 @@ svg.close-icon:hover {
       white-space: nowrap;
       margin-right: 3px;
     }
+  }
+  & > li.read-only > span::after {
+    content: ' [Read-Only]';
+    opacity: 0.5;
+    font-style: italic;
+    font-size: 11px;
   }
   & > li.unsaved:not(.active) {
     & > svg.close-icon {

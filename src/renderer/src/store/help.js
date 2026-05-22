@@ -61,7 +61,8 @@ const documentStateKeys = [
   'searchMatches',
   'scrollTop',
   'muyaIndexCursor',
-  'notifications'
+  'notifications',
+  'isReadOnly'
 ]
 
 export const getBlankFileState = (

@@ -5,29 +5,40 @@
   >
     <tabs v-show="showTabBar" />
     <div class="container">
-      <editor
-        :markdown="markdown"
-        :cursor="cursor"
-        :text-direction="textDirection"
-        :platform="platform"
+      <read-only-viewer
+        v-if="isCurrentFileReadOnly"
+        :content="markdown"
+        :filename="currentFilename"
+        :pathname="currentPathname"
       />
-      <source-code
-        v-if="sourceCode"
-        :markdown="markdown"
-        :muya-index-cursor="muyaIndexCursor"
-        :text-direction="textDirection"
-      />
+      <template v-else>
+        <editor
+          :markdown="markdown"
+          :cursor="cursor"
+          :text-direction="textDirection"
+          :platform="platform"
+        />
+        <source-code
+          v-if="sourceCode"
+          :markdown="markdown"
+          :muya-index-cursor="muyaIndexCursor"
+          :text-direction="textDirection"
+        />
+      </template>
     </div>
     <tab-notifications />
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useLayoutStore } from '@/store/layout'
+import { useEditorStore } from '@/store/editor'
 import { storeToRefs } from 'pinia'
 import Tabs from './tabs.vue'
 import Editor from './editor.vue'
 import SourceCode from './sourceCode.vue'
+import ReadOnlyViewer from './readOnlyViewer.vue'
 import TabNotifications from './notifications.vue'
 
 defineProps({
@@ -63,8 +74,14 @@ defineProps({
 })
 
 const layoutStore = useLayoutStore()
+const editorStore = useEditorStore()
 
 const { showSideBar, sideBarWidth } = storeToRefs(layoutStore)
+const { currentFile } = storeToRefs(editorStore)
+
+const isCurrentFileReadOnly = computed(() => !!currentFile.value?.isReadOnly)
+const currentFilename = computed(() => currentFile.value?.filename || '')
+const currentPathname = computed(() => currentFile.value?.pathname || '')
 </script>
 
 <style scoped>

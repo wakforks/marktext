@@ -346,6 +346,7 @@ export const useEditorStore = defineStore('editor', {
     },
 
     FILE_SAVE() {
+      if (this.currentFile.isReadOnly) return
       const projectStore = useProjectStore()
       const { id, filename, pathname, markdown } = this.currentFile
       const options = getOptionsFromState(this.currentFile)
@@ -374,6 +375,7 @@ export const useEditorStore = defineStore('editor', {
     },
 
     FILE_SAVE_AS() {
+      if (this.currentFile.isReadOnly) return
       const projectStore = useProjectStore()
       const { id, filename, pathname, markdown } = this.currentFile
       const options = getOptionsFromState(this.currentFile)
@@ -633,16 +635,25 @@ export const useEditorStore = defineStore('editor', {
           this.updateTabIdToIndex()
         }
 
-        bus.emit('file-changed', {
-          id,
-          markdown,
-          cursor,
-          muyaIndexCursor,
-          renderCursor: true,
-          history,
-          scrollTop,
-          blocks
-        })
+        if (currentFile.isReadOnly) {
+          bus.emit('readonly-file-changed', {
+            id,
+            content: markdown,
+            pathname,
+            filename: currentFile.filename
+          })
+        } else {
+          bus.emit('file-changed', {
+            id,
+            markdown,
+            cursor,
+            muyaIndexCursor,
+            renderCursor: true,
+            history,
+            scrollTop,
+            blocks
+          })
+        }
       }
 
       this.UPDATE_LINE_ENDING_MENU()
@@ -807,19 +818,29 @@ export const useEditorStore = defineStore('editor', {
         const fileState = this.tabs[index] || this.tabs[index - 1] || this.tabs[0] || {}
         this.currentFile = fileState
         if (typeof fileState.markdown === 'string') {
-          const { id, markdown, cursor, history, pathname, scrollTop, blocks, muyaIndexCursor } =
-            fileState
-          window.DIRNAME = pathname ? window.path.dirname(pathname) : ''
-          bus.emit('file-changed', {
-            id,
-            markdown,
-            cursor,
-            muyaIndexCursor,
-            renderCursor: true,
-            history,
-            scrollTop,
-            blocks
-          })
+          if (fileState.isReadOnly) {
+            window.DIRNAME = fileState.pathname ? window.path.dirname(fileState.pathname) : ''
+            bus.emit('readonly-file-changed', {
+              id: fileState.id,
+              content: fileState.markdown,
+              pathname: fileState.pathname,
+              filename: fileState.filename
+            })
+          } else {
+            const { id, markdown, cursor, history, pathname, scrollTop, blocks, muyaIndexCursor } =
+              fileState
+            window.DIRNAME = pathname ? window.path.dirname(pathname) : ''
+            bus.emit('file-changed', {
+              id,
+              markdown,
+              cursor,
+              muyaIndexCursor,
+              renderCursor: true,
+              history,
+              scrollTop,
+              blocks
+            })
+          }
         } else {
           window.DIRNAME = ''
         }
@@ -1487,6 +1508,70 @@ export const useEditorStore = defineStore('editor', {
       window.electron.ipcRenderer.on('mt::load-state', (_, state) => {
         this.RESTORE_BUFFERED_STATE(state)
       })
+    },
+
+    async OPEN_READ_ONLY_FILE({ pathname, selected = true }) {
+      const { tabs, currentFile } = this
+
+      const existingTab = tabs.find(
+        (t) => window.fileUtils.isSamePathSync(t.pathname, pathname)
+      )
+      if (existingTab) {
+        this.UPDATE_CURRENT_FILE(existingTab)
+        return
+      }
+
+      let content
+      try {
+        const buffer = await window.fileUtils.readFile(pathname)
+        content = buffer.toString('utf8')
+      } catch (err) {
+        notice.notify({
+          title: i18n.global.t('store.editor.errorLoadingTabTitle'),
+          message: err.message,
+          type: 'error',
+          time: 5000,
+          showConfirm: false
+        })
+        return
+      }
+
+      const id = getUniqueId()
+      const filename = window.path.basename(pathname)
+      const readOnlyTab = {
+        id,
+        pathname,
+        filename,
+        markdown: content,
+        isSaved: true,
+        isReadOnly: true,
+        encoding: { encoding: 'utf8', isBom: false },
+        lineEnding: 'lf',
+        trimTrailingNewline: 3,
+        adjustLineEndingOnSave: false,
+        history: { stack: [], index: -1, lastEditIndex: -1, lastInitIndex: -1 },
+        cursor: null,
+        wordCount: { paragraph: 0, word: 0, character: 0, all: 0 },
+        searchMatches: { index: -1, matches: [], value: '' },
+        scrollTop: 0,
+        muyaIndexCursor: null,
+        notifications: [],
+        lastSavedHistoryId: -1
+      }
+
+      if (currentFile && currentFile.isSaved && !currentFile.pathname) {
+        this.FORCE_CLOSE_TAB(currentFile)
+      }
+
+      this.SHOW_TAB_VIEW(false)
+
+      if (selected) {
+        this.UPDATE_CURRENT_FILE(readOnlyTab)
+      } else {
+        this.tabs.push(readOnlyTab)
+        this.updateTabIdToIndex()
+        debouncedSendBufferedState()
+      }
     }
   }
 })
@@ -1693,7 +1778,8 @@ const createBufferedTabState = (tab) => {
     cursor: toSerializableValue(tab.cursor, defaultFileState.cursor),
     wordCount: toSerializableValue(tab.wordCount, defaultFileState.wordCount),
     muyaIndexCursor: toSerializableValue(tab.muyaIndexCursor, defaultFileState.muyaIndexCursor),
-    scrollTop: tab.scrollTop ?? defaultFileState.scrollTop
+    scrollTop: tab.scrollTop ?? defaultFileState.scrollTop,
+    isReadOnly: tab.isReadOnly || false
   }
 }
 
