@@ -5,45 +5,43 @@ Markdown is a easy-to-use markup language for writing and this document contains
 ## Table of contents
 
 - [Markdown Syntax](#markdown-syntax)
-  * [Headings](#headings)
-  * [Paragraphs](#paragraphs)
-  * [Breaks](#breaks)
-  * [Horizontal Rule](#horizontal-rule)
-  * [Emphasis](#emphasis)
-    + [Bold](#bold)
-    + [Italics](#italics)
-    + [Strikethrough](#strikethrough)
-  * [Links](#links)
-    + [Autolinks](#autolinks)
-    + [Inline links](#inline-links)
-    + [Link titles](#link-titles)
-    + [Named Anchors](#named-anchors)
-  * [Images](#images)
-  * [Blockquotes](#blockquotes)
-  * [Lists](#lists)
-    + [Unordered](#unordered)
-    + [Ordered](#ordered)
-    + [Time-saving Tip](#time-saving-tip)
-  * [Todo List](#todo-list)
-  * [Tables](#tables)
-    + [Aligning cells](#aligning-cells)
-  * [Code](#code)
-    + [Inline code](#inline-code)
-    + ["Fenced" code block](#fenced-code-block)
-    + [Indented code](#indented-code)
-    + [Syntax highlighting](#syntax-highlighting)
-  * [Keyboard Keys](#keyboard-keys)
-  * [Emojis](#emojis)
-  * [Front Matter](#front-matter)
-  * [Math Formulas](#math-formulas)
-    + [Inline Math Formulas](#inline-math-formulas)
-    + [Block Math Formulas](#block-math-formulas)
-  * [Diagrams](#diagrams)
-  * [Raw HTML](#raw-html)
-  * [Escaping with backslashes](#escaping-with-backslashes)
-  * [Credits](#credits)
-
-<br>
+  - [Headings](#headings)
+  - [Paragraphs](#paragraphs)
+  - [Breaks](#breaks)
+  - [Horizontal Rule](#horizontal-rule)
+  - [Emphasis](#emphasis)
+    - [Bold](#bold)
+    - [Italics](#italics)
+    - [Strikethrough](#strikethrough)
+  - [Links](#links)
+    - [Autolinks](#autolinks)
+    - [Inline links](#inline-links)
+    - [Link titles](#link-titles)
+    - [Named Anchors](#named-anchors)
+  - [Images](#images)
+  - [Blockquotes](#blockquotes)
+  - [Lists](#lists)
+    - [Unordered](#unordered)
+    - [Ordered](#ordered)
+    - [Time-saving Tip](#time-saving-tip)
+  - [Todo List](#todo-list)
+  - [Tables](#tables)
+    - [Aligning cells](#aligning-cells)
+  - [Code](#code)
+    - [Inline code](#inline-code)
+    - ["Fenced" code block](#fenced-code-block)
+    - [Indented code](#indented-code)
+    - [Syntax highlighting](#syntax-highlighting)
+  - [Keyboard Keys](#keyboard-keys)
+  - [Emojis](#emojis)
+  - [Front Matter](#front-matter)
+  - [Math Formulas](#math-formulas)
+    - [Inline Math Formulas](#inline-math-formulas)
+    - [Block Math Formulas](#block-math-formulas)
+  - [Diagrams](#diagrams)
+  - [Raw HTML](#raw-html)
+  - [Escaping with backslashes](#escaping-with-backslashes)
+  - [Credits](#credits)
 
 ## Headings
 
@@ -69,21 +67,22 @@ H2
 Renders to:
 
 # h1 Heading
+
 ## h2 Heading
+
 ### h3 Heading
+
 #### h4 Heading
+
 ##### h5 Heading
+
 ###### h6 Heading
 
 Alternatively you can use underlines:
 
-H1
-======
+# H1
 
-H2
-------
-
-<br>
+## H2
 
 ## Paragraphs
 
@@ -92,8 +91,6 @@ Just write normal text:
 ```markdown
 Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.
 ```
-
-<br>
 
 ## Breaks
 
@@ -105,19 +102,17 @@ Alternatively you can add **two spaces** spaces at the end of your paragraph to 
 
 The HTML `<hr>` element is for creating a "thematic break" between paragraph-level elements. In markdown, you can use of the following for this purpose:
 
-* `___`: three consecutive underscores
-* `---`: three consecutive dashes
-* `***`: three consecutive asterisks
+- `___`: three consecutive underscores
+- `---`: three consecutive dashes
+- `***`: three consecutive asterisks
 
 Renders to:
 
-___
+---
 
 ---
 
-***
-
-<br>
+---
 
 ## Emphasis
 
@@ -139,7 +134,7 @@ renders to:
 
 For emphasizing a snippet of text with italics.
 
-The following snippet of text is _rendered as italicized text_.
+The following snippet of text is *rendered as italicized text*.
 
 ```markdown
 _rendered as italicized text_
@@ -147,7 +142,7 @@ _rendered as italicized text_
 
 renders to:
 
-_rendered as italicized text_
+*rendered as italicized text*
 
 ## Strikethrough
 
@@ -160,8 +155,6 @@ In GFM you can do strickthroughs by wrapping the text with double tildes.
 Which renders to:
 
 ~~Strike through this text.~~
-
-<br>
 
 ## Links
 
@@ -178,7 +171,6 @@ Renders to:
 <http://foo.bar.baz>
 
 URIs or email addresses that are not wrapped in angle brackets are not recognized as valid autolinks by markdown parsers.
-
 
 ### Inline links
 
@@ -198,7 +190,7 @@ Renders to (hover over the link, there is no tooltip):
 
 Renders to (hover over the link, there should be a tooltip):
 
-[Upstage](https://github.com/upstage/ "Visit Upstage!")
+[Upstage](https://github.com/upstage/)
 
 ### Named Anchors
 
@@ -228,8 +220,6 @@ Content for chapter one.
 
 Note that placement of achors is arbitrary, you can put them anywhere you want, not just in headings. This makes adding cross-references easy when writing markdown.
 
-<br>
-
 ## Images
 
 Images have a similar syntax to links but include a preceding exclamation point.
@@ -238,33 +228,23 @@ Images have a similar syntax to links but include a preceding exclamation point.
 ![MarkText](https://raw.githubusercontent.com/marktext/marktext/develop/resources/icons/256x256/marktext.png)
 ```
 
-![MarkText](https://raw.githubusercontent.com/marktext/marktext/develop/resources/icons/256x256/marktext.png)
-
-or
+![MarkText](https://raw.githubusercontent.com/marktext/marktext/develop/resources/icons/256x256/marktext.png)or
 
 ```markdown
 ![Alt text](hhttps://raw.githubusercontent.com/marktext/marktext/develop/resources/icons/256x256/marktext.png "MarkText logo")
 ```
 
-![Alt text](https://raw.githubusercontent.com/marktext/marktext/develop/resources/icons/256x256/marktext.png "MarkText logo")
-
-Like links, Images also have a footnote style syntax
+![Alt text](https://raw.githubusercontent.com/marktext/marktext/develop/resources/icons/256x256/marktext.png "MarkText logo")Like links, Images also have a footnote style syntax
 
 ```markdown
 ![Alt text][id]
 ```
 
-![Alt text][id]
-
-With a reference later in the document defining the URL location:
-
-[id]: https://raw.githubusercontent.com/marktext/marktext/develop/resources/icons/256x256/marktext.png  "MarkText logo"
+![Alt text](https://raw.githubusercontent.com/marktext/marktext/develop/resources/icons/256x256/marktext.png "MarkText logo")With a reference later in the document defining the URL location:
 
 ```markdown
 [id]: https://raw.githubusercontent.com/marktext/marktext/develop/resources/icons/256x256/marktext.png  "MarkText logo"
 ```
-
-<br>
 
 ## Blockquotes
 
@@ -293,14 +273,11 @@ Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
 
 Renders to:
 
-> Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue.
-Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
->> Sed adipiscing elit vitae augue consectetur a gravida nunc vehicula. Donec auctor
-odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac eu diam.
->>> Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue.
-Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
-
-<br>
+> Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue. Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
+>
+> > Sed adipiscing elit vitae augue consectetur a gravida nunc vehicula. Donec auctor odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac eu diam.
+> >
+> > > Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue. Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
 
 ## Lists
 
@@ -335,18 +312,18 @@ For example
 
 Renders to:
 
-+ Lorem ipsum dolor sit amet
-+ Consectetur adipiscing elit
-+ Integer molestie lorem at massa
-+ Facilisis in pretium nisl aliquet
-+ Nulla volutpat aliquam velit
+- Lorem ipsum dolor sit amet
+- Consectetur adipiscing elit
+- Integer molestie lorem at massa
+- Facilisis in pretium nisl aliquet
+- Nulla volutpat aliquam velit
   - Phasellus iaculis neque
   - Purus sodales ultricies
   - Vestibulum laoreet porttitor sem
   - Ac tristique libero volutpat at
-+ Faucibus porta lacus fringilla vel
-+ Aenean sit amet erat nunc
-+ Eget porttitor lorem
+- Faucibus porta lacus fringilla vel
+- Aenean sit amet erat nunc
+- Eget porttitor lorem
 
 ### Ordered
 
@@ -373,7 +350,6 @@ Renders to:
 6. Faucibus porta lacus fringilla vel
 7. Aenean sit amet erat nunc
 8. Eget porttitor lorem
-
 
 ### Time-saving Tip
 
@@ -403,8 +379,6 @@ Automatically re-numbers the items and renders to:
 7. Aenean sit amet erat nunc
 8. Eget porttitor lorem
 
-<br>
-
 ## Todo List
 
 ```markdown
@@ -416,7 +390,9 @@ Automatically re-numbers the items and renders to:
 Renders to:
 
 - [ ] Lorem ipsum dolor sit amet
+
 - [ ] Consectetur adipiscing elit
+
 - [ ] Integer molestie lorem at massa
 
 **Links in todo lists**
@@ -429,15 +405,15 @@ Renders to:
 
 Renders to:
 
-- [ ] [foo](#bar)
-- [ ] [baz](#qux)
-- [ ] [fez](#faz)
+- [ ] [foo-asa](#bar)
 
-<br>
+- [ ] [baz](#qux)
+
+- [ ] [fez](#faz)
 
 ## Tables
 
-Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header _(this line of dashes is required)_.
+Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header *(this line of dashes is required)*.
 
 - pipes do not need to be vertically aligned.
 - pipes on the left and right sides of the table are sometimes optional
@@ -456,10 +432,10 @@ Example:
 Renders to:
 
 | Option | Description |
-| ------ | ----------- |
-| data   | path to data files to supply the data that will be passed into templates. |
+| --- | --- |
+| data | path to data files to supply the data that will be passed into templates. |
 | engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| ext | extension to be used for dest files. |
 
 ### Aligning cells
 
@@ -476,11 +452,10 @@ To center the text in a column, add a colon to the left and right of the dashes 
 ```
 
 | Option | Description |
-| :-: | :-: |
-| data   | path to data files to supply the data that will be passed into templates. |
+| --- | --- |
+| data | path to data files to supply the data that will be passed into templates. |
 | engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
-
+| ext | extension to be used for dest files. |
 
 **Right-align the text in a column**
 
@@ -497,18 +472,16 @@ To right-align the text in a column, add a colon to the right of the dashes in t
 Renders to:
 
 | Option | Description |
-| ------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
+| --- | --- |
+| data | path to data files to supply the data that will be passed into templates. |
 | engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
-
-<br>
+| ext | extension to be used for dest files. |
 
 ## Code
 
 ### Inline code
 
-Wrap inline snippets of code with a single backtick: <code>`</code>.
+Wrap inline snippets of code with a single backtick: `` ` ``.
 
 For example, to show `<div></div>` inline with other text, just wrap it in backticks.
 
@@ -518,15 +491,15 @@ For example, to show `<div></div>` inline with other text, just wrap it in backt
 
 ### "Fenced" code block
 
-Three consecutive backticks, referred to as "code fences", are used to denote multiple lines of code: <code>```</code>.
+Three consecutive backticks, referred to as "code fences", are used to denote multiple lines of code: ```` ``` ````.
 
 For example, this:
 
-<pre>
+```
 ```html
 Example text here...
 ```
-</pre>
+```
 
 Appears like this when viewed in a browser:
 
@@ -547,17 +520,18 @@ Example:
     line 3 of code
 ```
 
-    // Some comments
-    line 1 of code
-    line 2 of code
-    line 3 of code
-
+```
+// Some comments
+line 1 of code
+line 2 of code
+line 3 of code
+```
 
 ### Syntax highlighting
 
-To activate the correct styling for the language inside the code block, simply add the file extension of the language you want to use directly after the first code "fence": <code>```js</code>, and syntax highlighting will automatically be applied in the rendered HTML (if supported by the parser). For example, to apply syntax highlighting to JavaScript code:
+To activate the correct styling for the language inside the code block, simply add the file extension of the language you want to use directly after the first code "fence": ```` ```js ````, and syntax highlighting will automatically be applied in the rendered HTML (if supported by the parser). For example, to apply syntax highlighting to JavaScript code:
 
-<pre>
+```
 ```js
 grunt.initConfig({
   assemble: {
@@ -578,7 +552,7 @@ grunt.initConfig({
   }
 });
 ```
-</pre>
+```
 
 Which renders to:
 
@@ -602,8 +576,6 @@ grunt.initConfig({
   }
 });
 ```
-
-<br>
 
 ## Keyboard Keys
 
@@ -619,11 +591,9 @@ To paste, please press <kbd>CmdOrCtrl</kbd>+<kbd>V</kbd>
 
 Which renders to:
 
-To copy, please press <kbd>CmdOrCtrl</kbd>+<kbd>C</kbd>
+To copy, please press CmdOrCtrl+C
 
-To paste, please press <kbd>CmdOrCtrl</kbd>+<kbd>V</kbd>
-
-<br>
+To paste, please press CmdOrCtrl+V
 
 ## Emojis
 
@@ -640,8 +610,6 @@ Which renders to:
 :heart: :zap: :cow: :dollar: :star: :tada:
 
 **NOTE:** MarkText provides an emoji picker with search functionality.
-
-<br>
 
 ## Front Matter
 
@@ -689,13 +657,11 @@ JSON front matter blocks are identified by an opening and closing `;;;` line or 
 Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus.
 ```
 
-<br>
-
 ## Math Formulas
 
 ### Inline Math Formulas
 
-Wrap one line LaTeX with a single dollar sign: <code>$</code>.
+Wrap one line LaTeX with a single dollar sign: `$`.
 
 ```markdown
 For example, to show $\alpha \beta \gamma$ inline with other text, just wrap it in dollar signs.
@@ -703,7 +669,7 @@ For example, to show $\alpha \beta \gamma$ inline with other text, just wrap it 
 
 ### Block Math Formulas
 
-Two consecutive dollar signs are used to denote multiple lines of math formulas: <code>$$</code>.
+Two consecutive dollar signs are used to denote multiple lines of math formulas: `$$`.
 
 For example, this:
 
@@ -724,15 +690,13 @@ m=\frac{b_y-a_y}{b_x-a_x}
 $$
 ```
 
-<br>
-
 ## Diagrams
 
 MarkText support class, flow chart, gantt and sequence diagrams powered by flowchart.js, mermaid and Vega-Lite. [Code](#code) blocks with special language identifiers are used for diagrams.
 
 For example, this:
 
-<pre>
+```
 ## Vega-lite diagram
 
 Please see [introduction to Vega-Lite](https://vega.github.io/vega-lite/tutorials/getting_started.html) for details.
@@ -843,7 +807,7 @@ Class01 : int chimp
 Class01 : int gorilla
 Class08 <--> C2: Cool label
 ```
-</pre>
+```
 
 ## PlantUML
 
@@ -859,8 +823,6 @@ Alice <-- Bob: Another authentication Response
 @enduml
 ```
 
-<br>
-
 ## Raw HTML
 
 Any text between `<` and `>` that looks like an HTML tag will be parsed as a raw HTML tag and rendered to HTML without escaping.
@@ -873,7 +835,7 @@ Example:
 
 Renders to:
 
-**Visit <a href="https://github.com">Jon Schlinkert's GitHub Profile</a>.**
+**Visit [Jon Schlinkert's GitHub Profile](https://github.com).**
 
 ## Escaping with backslashes
 
@@ -887,9 +849,7 @@ Example:
 
 Renders to:
 
-\*this is not italic*
-
-<br>
+\*this is not italic\*
 
 ## Credits
 
